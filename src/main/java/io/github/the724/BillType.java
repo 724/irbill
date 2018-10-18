@@ -1,3 +1,5 @@
+package io.github.the724;
+
 public enum BillType {
 
     WATER                   (1, "\u0642\u0628\u0636\u0622\u0628", "water bill"),
@@ -46,7 +48,7 @@ public enum BillType {
 
     @Override
     public String toString() {
-        return "BillType{" +
+        return "io.github.the724.BillType{" +
                 "type=" + type +
                 ", persianDescription='" + persianDescription + '\'' +
                 ", englishDescription='" + englishDescription + '\'' +

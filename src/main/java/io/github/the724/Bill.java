@@ -1,3 +1,5 @@
+package io.github.the724;
+
 public class Bill {
 
     private BillType type ;
@@ -47,7 +49,7 @@ public class Bill {
 
     @Override
     public String toString() {
-        return "Bill{" +
+        return "io.github.the724.Bill{" +
                 "type=" + type.toString() +
                 ", billId='" + billId + '\'' +
                 ", paymentId='" + paymentId + '\'' +
