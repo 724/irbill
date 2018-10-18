@@ -1,4 +1,4 @@
-public final class Bill {
+public class Bill {
 
     private BillType type ;
     private String billId ;
