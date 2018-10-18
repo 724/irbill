@@ -33,7 +33,7 @@ public enum BillType {
         return englishDescription;
     }
 
-    public BillType typeOf(int type) {
+    public static BillType typeOf(int type) {
 
         for(BillType item : values()) {
             if(item.getType() == type)
