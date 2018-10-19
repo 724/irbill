@@ -17,7 +17,7 @@ public final class Irbill {
      * @param barcode the barcode
      * @return the bill
      */
-    public static Bill parseBillBarCode(String barcode) {
+    public static Bill parseBarcode(String barcode) {
 
         String billId = getBillId(barcode) ;
         String payId = getPaymentId(barcode) ;
@@ -36,52 +36,23 @@ public final class Irbill {
         return null ;
     }
 
-    /**
-     * Validate a bill object instance, by checking its billId and paymentId
-     *
-     * @param bill the bill
-     * @return the boolean
-     */
-    public static boolean validateBill(Bill bill) {
+    public static Bill parseBillData(String billId, String paymentId) {
 
-        if(bill != null)
-            return validateBillId(bill.getBillId()) && validatePaymentId(bill.getBillId(),bill.getPaymentId()) ;
+        if(validateBillId(billId) && validatePaymentId(billId,paymentId)) {
 
-        return false ;
-    }
+            BillType billType = BillType.typeOf(billId.charAt(billId.length() - 2) - '0') ;
 
-    /**
-     * Validate a bill, by providing billId and paymentId
-     *
-     * @param billId    the bill id
-     * @param paymentId the payment id
-     * @return the boolean
-     */
-    public static boolean validateBill(String billId, String paymentId) {
-        return validateBillId(billId) && validatePaymentId(billId, paymentId) ;
-    }
-
-    /**
-     * Gets amount of the bill from paymentId
-     *
-     * @param paymentId the payment id
-     * @return the amount
-     */
-    public static long getAmount(String paymentId) {
-
-        if(checkAllDigits(paymentId)) {
-
-            if (paymentId.length() < 6) {
-                return 0L;
-            }
-
-            return Long.parseLong(paymentId.substring(0, paymentId.length() - 5)) * 1000;
+            return new Bill()
+                    .setBillId(billId)
+                    .setPaymentId(paymentId)
+                    .setType(billType)
+                    .setAmount(getAmount(paymentId)) ;
         }
 
-        return -1L;
+        return null ;
     }
 
-    private static boolean validateBillId(String billId) {
+    public static boolean validateBillId(String billId) {
 
         if (checkAllDigits(billId)) {
 
@@ -99,7 +70,7 @@ public final class Irbill {
         return false ;
     }
 
-    private static boolean validatePaymentId(String billId, String paymentId) {
+    public static boolean validatePaymentId(String billId, String paymentId) {
 
         if(checkAllDigits(billId) && checkAllDigits(paymentId)) {
 
@@ -115,6 +86,20 @@ public final class Irbill {
         }
 
         return false ;
+    }
+
+    private static long getAmount(String paymentId) {
+
+        if(checkAllDigits(paymentId)) {
+
+            if (paymentId.length() < 6) {
+                return 0L;
+            }
+
+            return Long.parseLong(paymentId.substring(0, paymentId.length() - 5)) * 1000;
+        }
+
+        return -1L;
     }
 
     private static boolean checkAllDigits(String expression) {
