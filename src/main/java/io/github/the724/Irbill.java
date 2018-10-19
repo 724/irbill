@@ -28,7 +28,7 @@ public final class Irbill {
 
             return new Bill()
                     .setBillId(billId)
-                    .setPaymentId(payId)
+                    .setPaymentId(removeLeadingZeroesFromPaymentId(payId))
                     .setType(billType)
                     .setAmount(getAmount(payId)) ;
         }
@@ -44,7 +44,7 @@ public final class Irbill {
 
             return new Bill()
                     .setBillId(billId)
-                    .setPaymentId(paymentId)
+                    .setPaymentId(removeLeadingZeroesFromPaymentId(paymentId))
                     .setType(billType)
                     .setAmount(getAmount(paymentId)) ;
         }
@@ -74,10 +74,12 @@ public final class Irbill {
 
         if(checkAllDigits(billId) && checkAllDigits(paymentId)) {
 
-            if (checkIdLength(billId) && checkIdLength(paymentId)) {
+            String formattedPaymentId = removeLeadingZeroesFromPaymentId(paymentId) ;
 
-                int checkDigit = getCheckDigit(billId + paymentId.substring(0, paymentId.length() - 1)) ;
-                int payIdLastDigit = paymentId.charAt(paymentId.length() - 1);
+            if (checkIdLength(billId) && checkIdLength(formattedPaymentId)) {
+
+                int checkDigit = getCheckDigit(billId + formattedPaymentId.substring(0, formattedPaymentId.length() - 1)) ;
+                int payIdLastDigit = formattedPaymentId.charAt(formattedPaymentId.length() - 1);
 
                 return validateBillId(billId) && checkDigit == payIdLastDigit;
             }
@@ -109,6 +111,23 @@ public final class Irbill {
 
     private static boolean checkIdLength(String id) {
         return id.length() >= 6 && id.length() <= 13 ;
+    }
+
+    private static String removeLeadingZeroesFromPaymentId(String paymentId) {
+        try
+        {
+            return String.valueOf(Integer.valueOf(paymentId));
+
+        } catch (Exception exc) {
+            String temp = paymentId;
+
+            while (temp.indexOf("0") == 0) {
+                temp = temp.substring(1);
+            }
+
+            return temp;
+        }
+
     }
 
     private static int getCheckDigit(String billId) {
