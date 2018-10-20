@@ -9,12 +9,12 @@ implementation 'io.github.the724:irbill:[latest-version]'
 ```
 ---
 
-If you want to validate and parse a barcode representing a bill, use the `parseBarcode()` method. If the barcode contains a valid bill, the `Bill` object contains information about the bill.
+For validating and parsing a barcode representing a bill, use the `parseBarcode()` method. If the barcode contains a valid bill, the `Bill` object contains information about the bill.
 ```
 Bill bill = IrBill.parseBarcode("the-string-data-of-barcode") ;
 ```
 
-If you want to validate and parse `billId` and `paymentId`, also known as شناسه قبض  and  شناسه پرداخت, you can alternatively use the `parseBillData` method :
+In order to validate and parse `billId` and `paymentId`, also known as شناسه قبض  and  شناسه پرداخت, you can alternatively use the `parseBillData` method :
 
 ```
 Bill bill = IrBill.parseBillData("billId","paymentId");
@@ -27,10 +27,23 @@ if(IrBill.validateBillId("billId")) ...
 
 if(IrBill.validatePaymentId("billId","paymentId")...
 ```
+
+The `Bill` class has the following field members :
+
+```
+class Bill {
+
+    private BillType type ;
+    private String billId ;
+    private String paymentId ;
+    private long amount ;
+    
+ }   
+```
+
+and the `BillType` enum contains information on different types of bills and their string representations in Persian and English.
 <br/>
 
-[For more information on Iran bill issuing algorithm, read the companion documentation.](https://github.com/the724/irbill/iran-bill.pdf) 
-<br/>
 
 ### License
 
