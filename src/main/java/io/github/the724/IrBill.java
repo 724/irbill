@@ -3,11 +3,11 @@ package io.github.the724;
 import java.util.regex.Pattern;
 
 /**
- * The type io.github.the724.Irbill.
+ * The type io.github.the724.IrBill.
  */
-public final class Irbill {
+public final class IrBill {
 
-    private Irbill(){
+    private IrBill(){
         throw new AssertionError();
     }
 
