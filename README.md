@@ -1,4 +1,4 @@
-[ ![Download](https://api.bintray.com/packages/farhad/maven/irbill/images/download.svg) ](https://bintray.com/farhad/maven/irbill/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/farhad/maven/irbill/images/download.svg) ](https://bintray.com/farhad/maven/irbill/_latestVersion) [![HitCount](http://hits.dwyl.io/the724/irbill.svg)](http://hits.dwyl.io/the724/irbill)
 
 ```groovy
 repositories {
