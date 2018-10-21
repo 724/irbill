@@ -1,6 +1,6 @@
 [ ![Download](https://api.bintray.com/packages/farhad/maven/irbill/images/download.svg) ](https://bintray.com/farhad/maven/irbill/_latestVersion)
 
-```
+```groovy
 repositories {
 	jcenter()
 }
@@ -10,19 +10,19 @@ implementation 'io.github.the724:irbill:[latest-version]'
 ---
 
 For validating and parsing a barcode representing a bill, use the `parseBarcode()` method. If the barcode contains a valid bill, the `Bill` object contains information about the bill.
-```
+```java
 Bill bill = IrBill.parseBarcode("the-string-data-of-barcode") ;
 ```
 
 In order to validate and parse `billId` and `paymentId`, also known as شناسه قبض  and  شناسه پرداخت, you can alternatively use the `parseBillData` method :
 
-```
+```java
 Bill bill = IrBill.parseBillData("billId","paymentId");
 ```
 
 There are also two public utility methods, `validateBillId` and `validatePaymentId`, which can come handy for further debugging.
 
-```
+```java
 if(IrBill.validateBillId("billId")) ...
 
 if(IrBill.validatePaymentId("billId","paymentId")...
@@ -30,13 +30,13 @@ if(IrBill.validatePaymentId("billId","paymentId")...
 
 The `Bill` class has the following field members :
 
-```
+``` java
 class Bill {
 
     private BillType type ;
     private String billId ;
     private String paymentId ;
-    private long amount ;
+    private long amount ; //in RIALS (IRR)
     
  }   
 ```
