@@ -9,7 +9,7 @@ implementation 'io.github.the724:irbill:[latest-version]'
 ```
 ---
 
-For validating and parsing a barcode representing a bill, use the `parseBarcode()` method. If the barcode contains a valid bill, the `Bill` object contains information about the bill.
+For validating and parsing a barcode representing a bill, use the `parseBarcode()` method. 
 ```java
 Bill bill = IrBill.parseBarcode("the-string-data-of-barcode") ;
 ```
