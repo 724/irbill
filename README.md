@@ -13,12 +13,14 @@ For validating and parsing a barcode representing a bill, use the `parseBarcode(
 ```java
 Bill bill = IrBill.parseBarcode("the-string-data-of-barcode") ;
 ```
+If the barcode contains valid data, the `bill` object contains information such has billId, paymentId, amount and bill type. Otherwise the `bill` will be `null`.
 
 In order to validate and parse `billId` and `paymentId`, also known as شناسه قبض  and  شناسه پرداخت, you can alternatively use the `parseBillData` method :
 
 ```java
 Bill bill = IrBill.parseBillData("billId","paymentId");
 ```
+If the billId and paymentId are valid, the `bill` object will contain more complementary information such as amount and bill type. Otherwise the `bill` will be `null`.
 
 There are also two public utility methods, `validateBillId` and `validatePaymentId`, which can come handy for further debugging.
 
@@ -44,6 +46,7 @@ class Bill {
 and the `BillType` enum contains information on different types of bills and their string representations in Persian and English.
 <br/>
 
+Finally, if the `paymentId` strings starts with leading zeroes, which is a typical case with bills of all types, **all** IrBill methods that accept `paymentId`, either directly or indirectly will take care of the trimming.
 
 ### License
 
